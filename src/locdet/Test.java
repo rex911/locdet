@@ -44,7 +44,7 @@ public class Test {
 		s.split(corpus.getTextLabels().instanceIterator(label));
 		TextLabelsExperiment expt = new TextLabelsExperiment(
 				corpus.getTextLabels(), 
-				s,
+				cvs,
 				learner,
 				label, label + "_prediction");
 		expt.doExperiment();
