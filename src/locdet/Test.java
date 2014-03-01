@@ -36,7 +36,7 @@ public class Test {
 		//TextLabelsAnnotatorTeacher teacher = new TextLabelsAnnotatorTeacher(corpus.getTextLabels(),
 				//label);
 				
-		SequenceAnnotatorLearner learner = new SequenceAnnotatorLearner(new CRFLearner("ll"), new Recommended.TokenFE());
+		SequenceAnnotatorLearner learner = new SequenceAnnotatorLearner(new CRFLearner("trainer ll"), new Recommended.TokenFE());
 		//SequenceAnnotatorLearner.SequenceAnnotator ann = (SequenceAnnotator) teacher.train(learner);
 		RandomSplitter s = new RandomSplitter(0.7);
 		CrossValSplitter cvs = new CrossValSplitter(5);
