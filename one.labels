@@ -1,8 +1,0 @@
-closeType 4445.xml other
-closeType 4445.xml continent
-addToType 4445.xml 59 7 Location
-closeType 4445.xml Location
-closeType 4445.xml SP
-closeType 4445.xml country
-addToType 4445.xml 59 7 city
-closeType 4445.xml city
