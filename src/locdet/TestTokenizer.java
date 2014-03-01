@@ -25,15 +25,16 @@ public class TestTokenizer {
 		// TODO Auto-generated method stub
 		String s = "121549818 375221347464384514\nWed Sep 04 11:38:35 +0000 2013\nAustin,Texas\nno_location\nI've collected 4,536 gold coins! http://t.co/zthFmtXrZG #android, #androidgames, #gameinsight";
 		Document document = new Document("1", s);
-		Corpus corpus = new Corpus("small", "small.labels", new TwitterTokenizer());
+		Corpus corpus = new Corpus("train", "train.labels", new TwitterTokenizer());
 		Iterator<Span> iter = corpus.getTextLabels().instanceIterator("Location");
 		//Iterator<Span> iter = corpus.getTextbase().documentSpanIterator();
 		while (iter.hasNext()){
 			Span temp = iter.next();
 		    if (temp.size() == 0){
 		    //corpus.getTextbase().temp.getDocumentId());
+
 		    System.out.println(temp.getDocumentContents());
-		    }
+		    
 			
 		}
 		/*TextToken[] tt = new TwitterTokenizer().splitIntoTokens(document);
@@ -41,5 +42,7 @@ public class TestTokenizer {
 			System.out.println(tt[i]);
 		}*/
 	}
-
+	}
 }
+
+	
