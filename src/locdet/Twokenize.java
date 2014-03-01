@@ -314,7 +314,7 @@ public class Twokenize {
      */
     public static String normalizeTextForTagger(String text) {
     	text = text.replaceAll("&amp;", "&");
-    	text = StringEscapeUtils.unescapeHtml3(text);
+    	text = StringEscapeUtils.unescapeHtml4(text);
     	return text;
     }
 

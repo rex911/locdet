@@ -5,6 +5,7 @@ package locdet;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.Iterator;
 
 import edu.cmu.minorthird.text.*;
 import edu.cmu.minorthird.text.learn.*;
@@ -27,12 +28,13 @@ public class Test {
 	 */
 	public static void main(String[] args) throws NumberFormatException, IOException, ParseException {
 		// TODO Auto-generated method stub
-		String textDir = "train/";	
+		String textDir = "train";	
 		String labelDir = "train.labels";
+		//Corpus corpus = new Corpus(textDir, labelDir);
 		Corpus corpus = new Corpus(textDir, labelDir, new TwitterTokenizer());
 		String label = "Location";
-		TextLabelsAnnotatorTeacher teacher = new TextLabelsAnnotatorTeacher(corpus.getTextLabels(),
-				"city");
+		//TextLabelsAnnotatorTeacher teacher = new TextLabelsAnnotatorTeacher(corpus.getTextLabels(),
+				//label);
 				
 		SequenceAnnotatorLearner learner = new SequenceAnnotatorLearner(new CRFLearner(), new Recommended.TokenFE());
 		//SequenceAnnotatorLearner.SequenceAnnotator ann = (SequenceAnnotator) teacher.train(learner);

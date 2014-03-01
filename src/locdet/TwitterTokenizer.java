@@ -33,9 +33,6 @@ public class TwitterTokenizer implements Tokenizer {
 		List<String> temp = Twokenize.tokenize(documentText);
 		String[] tokenValues = temp.toArray(new String[temp.size()]);
 		for(int i=0;i<tokenValues.length;i++){
-			if (tokenValues[i].length() == 0) {
-				System.out.println(tokenValues);
-			}
 			// Skip upto the first char in the next token
 			currPos=documentText.indexOf(tokenValues[i],currPos);
 			// Create the token
