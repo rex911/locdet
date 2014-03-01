@@ -584,7 +584,7 @@ addToType 1963.xml 60 18 Location
 addToType 1964.xml 73 9 Location
 addToType 1969.xml 60 8 Location
 addToType 197.xml 60 8 Location
-addToType 1971.xml 180 2 Location
+addToType 1971.xml 182 1 Location
 addToType 1972.xml 61 3 Location
 addToType 1973.xml 60 12 Location
 addToType 1974.xml 60 16 Location
@@ -30673,7 +30673,7 @@ addToType 1950.xml 74 12 country
 addToType 1953.xml 78 2 country
 addToType 1954.xml 70 11 country
 addToType 1957.xml 60 2 country
-addToType 1971.xml 180 2 country
+addToType 1971.xml 182 1 country
 addToType 1972.xml 61 3 country
 addToType 1974.xml 67 9 country
 addToType 1975.xml 67 14 country
