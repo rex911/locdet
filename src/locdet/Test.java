@@ -32,7 +32,7 @@ public class Test {
 		String labelDir = "train.labels";
 		//Corpus corpus = new Corpus(textDir, labelDir);
 		Corpus corpus = new Corpus(textDir, labelDir, new TwitterTokenizer());
-		String label = "Location";
+		String label = "city";
 		//TextLabelsAnnotatorTeacher teacher = new TextLabelsAnnotatorTeacher(corpus.getTextLabels(),
 				//label);
 				
@@ -44,7 +44,7 @@ public class Test {
 		s.split(corpus.getTextLabels().instanceIterator(label));
 		TextLabelsExperiment expt = new TextLabelsExperiment(
 				corpus.getTextLabels(), 
-				s,
+				cvs,
 				learner,
 				label, label + "_prediction");
 		expt.doExperiment();
