@@ -21,7 +21,7 @@ import edu.cmu.minorthird.ui.*;
  * @author rex
  *
  */
-public class Test {
+public class Train {
 
 	/**
 	 * @param args

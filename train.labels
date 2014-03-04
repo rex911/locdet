@@ -1173,6 +1173,7 @@ addToType 2865.xml 61 9 Location
 addToType 2866.xml 60 6 Location
 addToType 2868.xml 60 15 Location
 addToType 2871.xml 61 7 Location
+addToType 2871.xml 124 9 Location
 addToType 2871.xml 124 17 Location
 addToType 2872.xml 59 9 Location
 addToType 2882.xml 60 10 Location
@@ -2927,6 +2928,7 @@ addToType 5742.xml 61 3 Location
 addToType 5748.xml 61 10 Location
 addToType 5748.xml 191 5 Location
 addToType 5748.xml 217 7 Location
+addToType 5751.xml 60 11 Location
 addToType 5752.xml 59 17 Location
 addToType 5755.xml 61 13 Location
 addToType 5756.xml 60 10 Location
@@ -9589,6 +9591,7 @@ addToType 2999.xml 61 8 SP
 addToType 3.xml 70 2 SP
 addToType 300.xml 71 2 SP
 addToType 3002.xml 58 2 SP
+addToType 3007.xml 73 7 SP
 addToType 3018.xml 74 2 SP
 addToType 3054.xml 59 10 SP
 addToType 3063.xml 60 2 SP
@@ -16944,6 +16947,7 @@ addToType 2927.xml 61 6 city
 addToType 2933.xml 61 8 city
 addToType 2933.xml 70 8 city
 addToType 2934.xml 58 8 city
+addToType 2935.xml 60 7 city
 addToType 2938.xml 60 8 city
 addToType 2941.xml 61 11 city
 addToType 2942.xml 60 6 city
@@ -31561,6 +31565,7 @@ addToType 5714.xml 60 6 country
 addToType 572.xml 60 3 country
 addToType 5723.xml 61 3 country
 addToType 5742.xml 61 3 country
+addToType 5751.xml 60 11 country
 addToType 5752.xml 67 9 country
 addToType 5757.xml 72 2 country
 addToType 5765.xml 60 7 country
@@ -37804,6 +37809,7 @@ addToType 2899.xml 72 7 other
 addToType 292.xml 60 7 other
 addToType 2956.xml 60 9 other
 addToType 296.xml 59 12 other
+addToType 2970.xml 59 4 other
 addToType 3034.xml 70 14 other
 addToType 3077.xml 60 5 other
 addToType 3096.xml 59 12 other

@@ -9,16 +9,18 @@ package gazetteer;
  * the class that stores information of a certain location
  */
 public class Location implements Comparable<Location>{
-	public String name, type, lat, lon, population;
+	public String id, name, type, lat, lon, population, line;
 	public String[] higher;
 	public Location(String args) {
-		String parts[] = args.split("\t", 6);
-		this.name = parts[0];
-		this.type = parts[1];
-		this.higher = parts[2].split("_");
-	    this.population = parts[3];
-	    this.lat = parts[4];
-	    this.lon = parts[5];
+		this.line = args;
+		String parts[] = args.split("\t", 7);
+		this.id = parts[0];
+		this.name = parts[1];
+		this.type = parts[2];
+		this.higher = parts[3].split("_");
+	    this.population = parts[4];
+	    this.lat = parts[5];
+	    this.lon = parts[6];
 	}
 	@Override
 	public int compareTo(Location that) {

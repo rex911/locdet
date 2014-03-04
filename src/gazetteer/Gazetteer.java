@@ -31,11 +31,11 @@ public class Gazetteer {
 		while ((line = br.readLine()) != null) {
 		    // Deal with the line
 			Location temp = new Location(line.replace("\n", ""));
-			if (!locations.containsKey(temp.name)) {
-			    locations.put(temp.name, new ArrayList<Location>(Arrays.asList(temp)));
+			if (!locations.containsKey(temp.name.toLowerCase())) {
+			    locations.put(temp.name.toLowerCase(), new ArrayList<Location>(Arrays.asList(temp)));
 			}
 			else {
-				locations.get(temp.name).add(temp);
+				locations.get(temp.name.toLowerCase()).add(temp);
 			}
 		}
 		// Done with the file
