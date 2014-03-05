@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -22,7 +23,7 @@ import java.util.TreeMap;
  * A gazetteer that stores information about a list of locations
  */
 public class Gazetteer {
-	public TreeMap<String, List<Location>> locations = new TreeMap();
+	public Hashtable<String, List<Location>> locations = new Hashtable<String, List<Location>>();
 	
 	public Gazetteer(String fileName) throws IOException {
 		InputStream fis = new FileInputStream(fileName);
@@ -30,12 +31,23 @@ public class Gazetteer {
 		String line;
 		while ((line = br.readLine()) != null) {
 		    // Deal with the line
-			Location temp = new Location(line.replace("\n", ""));
+			String[] parts = line.replace("\n", "").split("\t", 8);
+			Location temp = new Location(parts[0], parts[1], parts[2], parts[3],
+					parts[4], parts[5], parts[6]);
 			if (!locations.containsKey(temp.name.toLowerCase())) {
 			    locations.put(temp.name.toLowerCase(), new ArrayList<Location>(Arrays.asList(temp)));
 			}
-			else {
+			else if (!locations.get(temp.name.toLowerCase()).contains(temp)){
 				locations.get(temp.name.toLowerCase()).add(temp);
+			}
+			// add hashtable for alternate names
+			for (String name: parts[7].split(",")){
+				if (!locations.containsKey(name.toLowerCase())) {
+				    locations.put(name.toLowerCase(), new ArrayList<Location>(Arrays.asList(temp)));
+				}
+				else if (!locations.get(name.toLowerCase()).contains(temp)){
+					locations.get(name.toLowerCase()).add(temp);
+				}
 			}
 		}
 		// Done with the file

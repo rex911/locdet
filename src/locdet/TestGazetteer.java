@@ -14,7 +14,7 @@ import gazetteer.Location;
  * @author rex
  *
  */
-public class SortLocation {
+public class TestGazetteer {
 
 	/**
 	 * @param args
@@ -24,14 +24,18 @@ public class SortLocation {
 		// TODO Auto-generated method stub
 		Gazetteer gaz = new Gazetteer("hyer.txt");
 		PrintWriter out = new PrintWriter("sortedhyer.txt");
-		for(Map.Entry<String,List<Location>> entry : gaz.locations.entrySet()) {
+		List<Location> list = gaz.locations.get("atlanta");
+		Iterator<Location> i = list.iterator();
+		while (i.hasNext()) out.println(i.next());
+		/*for(Map.Entry<String,List<Location>> entry : gaz.locations.entrySet()) {
 			  String key = entry.getKey();
 			  List<Location> value = entry.getValue();
 			  Iterator<Location> i = value.iterator();
+			  out.println(key);
 			  while (i.hasNext()) {
-			      out.println(i.next().line);
+			      
 			  }
-		}
+		}*/
 		out.close();
 		
 	}
