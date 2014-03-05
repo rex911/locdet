@@ -23,7 +23,7 @@ import gazetteer.Location;
  */
 public class GeoGeoDisambiguator {
 
-	public Location disambiguate(Gazetteer gaz, MutableTextLabels labels, Span name) {
+	public static Location disambiguate(Gazetteer gaz, MutableTextLabels labels, Span name) {
 		
 		List<Location> candi = gaz.locations.get(name.asString().toLowerCase());
 		if (candi == null){
@@ -37,7 +37,7 @@ public class GeoGeoDisambiguator {
 		}
 	}
 	// from a list of locations, select the most plausible one given the context
-	public Location infer(List<Location> candi, 
+	public static Location infer(List<Location> candi, 
 			MutableTextLabels labels, Span name) {
 		List<Location> tempCandi = new ArrayList<Location>();
 		for (Location loc : candi) {
@@ -47,6 +47,7 @@ public class GeoGeoDisambiguator {
 		}
 		if (tempCandi.size() == 1) return tempCandi.get(0);
 		if (tempCandi.size() == 0) return null;
+		candi = tempCandi;
 		Span tweet = name.documentSpan();
 		Iterator<Span> i = labels.instanceIterator("Location", tweet.getDocumentId());
 		tempCandi = new ArrayList<Location>(); //temporary candidates
@@ -57,7 +58,7 @@ public class GeoGeoDisambiguator {
 				Span higher = tweet.charIndexProperSubSpan(name.getHiChar()+1, adjacent.getHiChar());
 				for (Location loc : candi){
 					for (int j = 0; j<higher.size(); j++) {
-						if (Arrays.asList(loc.higher).contains(j)){
+						if (loc.higher.contains(j)){
 							tempCandi.add(loc);
 							break;
 						}
@@ -66,6 +67,7 @@ public class GeoGeoDisambiguator {
 				break;
 			}
 		}
+		if (tempCandi.size() == 1) return tempCandi.get(0);
 		return null;
 	}
 }
