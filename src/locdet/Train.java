@@ -5,19 +5,23 @@ package locdet;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.Iterator;
-
-import edu.cmu.minorthird.text.*;
 import edu.cmu.minorthird.text.learn.*;
-import edu.cmu.minorthird.text.learn.SequenceAnnotatorLearner.SequenceAnnotator;
 import edu.cmu.minorthird.text.learn.experiments.*;
-import edu.cmu.minorthird.classify.Splitter;
 import edu.cmu.minorthird.classify.experiments.CrossValSplitter;
 import edu.cmu.minorthird.classify.experiments.RandomSplitter;
 import edu.cmu.minorthird.classify.sequential.*;
 import edu.cmu.minorthird.ui.*;
 
 /**
+ * Run this class to see results of CRF classifier
+ * 
+ * Configurations:
+ * The value of variable String label specifies which label to predict
+ * Change the value of variable String dir to "small" to use a smaller corpus which can
+ * be trained faster.
+ * The second argument of TextLabelsExperiment decides how training data are splitted; 
+ * use s for 70%-30% split, use cvs for 5-fold CV.
+ * 
  * @author rex
  *
  */
@@ -27,12 +31,13 @@ public class Train {
 	 * @param args
 	 */
 	public static void main(String[] args) throws NumberFormatException, IOException, ParseException {
-		// TODO Auto-generated method stub
-		String textDir = "train";	
-		String labelDir = "train.labels";
+		String dir = "train";	
+		String label = "city";
+		String textDir = dir;
+		String labelDir = dir + ".labels";
 		//Corpus corpus = new Corpus(textDir, labelDir);
 		Corpus corpus = new Corpus(textDir, labelDir, new TwitterTokenizer());
-		String label = "city";
+		
 		//TextLabelsAnnotatorTeacher teacher = new TextLabelsAnnotatorTeacher(corpus.getTextLabels(),
 				//label);
 				

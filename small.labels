@@ -751,6 +751,7 @@ addToType 992.xml 60 11 Location
 addToType 993.xml 59 9 Location
 addToType 996.xml 61 7 Location
 addToType 999.xml 58 3 Location
+closeType .DS_Store Location
 closeType 10.xml Location
 closeType 100.xml Location
 closeType 1000.xml Location
@@ -2354,6 +2355,7 @@ addToType 959.xml 72 2 SP
 addToType 973.xml 69 2 SP
 addToType 985.xml 67 2 SP
 addToType 988.xml 69 2 SP
+closeType .DS_Store SP
 closeType 10.xml SP
 closeType 100.xml SP
 closeType 1000.xml SP
@@ -4314,6 +4316,7 @@ addToType 986.xml 60 8 city
 addToType 988.xml 59 8 city
 addToType 99.xml 61 10 city
 addToType 996.xml 61 7 city
+closeType .DS_Store city
 closeType 10.xml city
 closeType 100.xml city
 closeType 1000.xml city
@@ -5740,6 +5743,7 @@ addToType 329.xml 130 6 continent
 addToType 612.xml 80 6 continent
 addToType 696.xml 80 6 continent
 addToType 961.xml 80 6 continent
+closeType .DS_Store continent
 closeType 10.xml continent
 closeType 100.xml continent
 closeType 1000.xml continent
@@ -7450,6 +7454,7 @@ addToType 98.xml 69 9 country
 addToType 992.xml 60 11 country
 addToType 993.xml 59 9 country
 addToType 999.xml 58 3 country
+closeType .DS_Store country
 closeType 10.xml country
 closeType 100.xml country
 closeType 1000.xml country
@@ -8922,6 +8927,7 @@ addToType 916.xml 61 19 other
 addToType 923.xml 60 6 other
 addToType 938.xml 60 8 other
 addToType 960.xml 60 8 other
+closeType .DS_Store other
 closeType 10.xml other
 closeType 100.xml other
 closeType 1000.xml other
