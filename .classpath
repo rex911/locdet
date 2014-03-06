@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="lib" path="lib/class" sourcepath="/Applications/MinorThird/src"/>
+	<classpathentry kind="lib" path="lib/bsh.jar"/>
+	<classpathentry kind="lib" path="lib/colt.jar"/>
+	<classpathentry kind="lib" path="lib/com.jar"/>
+	<classpathentry kind="lib" path="lib/commons-lang3-3.2.1-javadoc.jar"/>
+	<classpathentry kind="lib" path="lib/commons-lang3-3.2.1-sources.jar"/>
+	<classpathentry kind="lib" path="lib/commons-lang3-3.2.1-test-sources.jar"/>
+	<classpathentry kind="lib" path="lib/commons-lang3-3.2.1-tests.jar"/>
+	<classpathentry kind="lib" path="lib/commons-lang3-3.2.1.jar"/>
+	<classpathentry kind="lib" path="lib/CRF.jar"/>
+	<classpathentry kind="lib" path="lib/jcommon-0.8.8.jar"/>
+	<classpathentry kind="lib" path="lib/jfreechart-0.9.13.jar"/>
+	<classpathentry kind="lib" path="lib/junit.jar"/>
+	<classpathentry kind="lib" path="lib/jwf.jar"/>
+	<classpathentry kind="lib" path="lib/LBFGS.jar"/>
+	<classpathentry kind="lib" path="lib/LBJ2Library.jar"/>
+	<classpathentry kind="lib" path="lib/LBJPOS.jar"/>
+	<classpathentry kind="lib" path="lib/libsvm.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-1.2.8.jar"/>
+	<classpathentry kind="lib" path="lib/secondstring.jar"/>
+	<classpathentry kind="lib" path="lib/trove.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
