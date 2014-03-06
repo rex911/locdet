@@ -24,6 +24,12 @@ public class Corpus {
 	private MutableTextLabels tl;
 	
 	// constructor. build the corpus from both 
+	/**
+	 * @param textDir
+	 * @param labelDir
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	public Corpus (String textDir, String labelDir) throws IOException, ParseException {
 		File textFile = new File(textDir);
 		File labelFile = new File(labelDir);

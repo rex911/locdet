@@ -12,7 +12,8 @@ import java.util.List;
  * the class that stores information of a certain location
  */
 public class Location implements Comparable<Location>{
-	public final String id, name, type, lat, lon, population;
+	public final String id, name, type, lat, lon;
+	public final int population;
 	public final List<String> higher;
 	public Location(String id, String name, String type, String higher, String population,
 			String lat, String lon) {
@@ -20,13 +21,19 @@ public class Location implements Comparable<Location>{
 		this.name = name;
 		this.type = type;
 		this.higher = Arrays.asList(higher.split("_"));
-	    this.population = population;
+		int temp;
+	    try {
+			temp = Integer.parseInt(population);
+		} catch (NumberFormatException e) {
+			temp = 0;
+		}
+	    this.population = temp;
 	    this.lat = lat;
 	    this.lon = lon;
 	    //this.alternate = Arrays.asList(parts[7].split(","));
 	}
 	@Override
 	public int compareTo(Location that) {
-		return this.name.compareTo(that.name);
+		return this.population - that.population;
 	}
 }

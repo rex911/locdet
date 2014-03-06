@@ -26,21 +26,18 @@ public class TestDisambiguator {
 	 * @throws IOException 
 	 */
 	public static void main(String[] args) throws IOException, ParseException {
-		// TODO Auto-generated method stub
-		String s = "121549818 375221347464384514\nWed Sep 04 11:38:35 +0000 2013\nAustin,Texas\nno_location\nI've collected 4,536 gold coins! http://t.co/zthFmtXrZG #android, #androidgames, #gameinsight";
-		Document document = new Document("1", s);
 		Corpus corpus = new Corpus("small", "small.labels", new TwitterTokenizer());
-		Set<String> set = corpus.getTextLabels().getTokenProperties();
-		System.out.println(set.size());
 		Iterator<Span> i = corpus.getTextLabels().instanceIterator("city");
 		Gazetteer gaz = new Gazetteer("hyer.txt");
-		int count = 0;
+		int count = 0, count2 = 0;
 		while (i.hasNext()){
-			Location temp = new GeoGeoDisambiguator().disambiguate(gaz, corpus.getTextLabels(), i.next());
+			Span name = i.next();
+			Location temp = new GeoGeoDisambiguator().disambiguate(gaz, corpus.getTextLabels(), name);
 			if (temp!=null) {
-				System.out.println(temp.name);
 				count ++;
-			}
+			} else System.out.println(name.asString());
+			/*if (gaz.get(i.next().asString()) != null) count++;
+			count2 ++;*/
 		}
 		System.out.println(count);
 	}

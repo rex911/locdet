@@ -55,4 +55,7 @@ public class Gazetteer {
 		br = null;
 		fis = null;
 	}
+	public List<Location> get(String name){
+		return locations.get(name.toLowerCase());
+	}
 }
