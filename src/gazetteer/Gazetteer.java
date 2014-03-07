@@ -23,7 +23,7 @@ import java.util.TreeMap;
  * A gazetteer that stores information about a list of locations
  */
 public class Gazetteer {
-	public Hashtable<String, List<Location>> locations = new Hashtable<String, List<Location>>();
+	public final Hashtable<String, List<Location>> locations = new Hashtable<String, List<Location>>();
 	
 	public Gazetteer(String fileName) throws IOException {
 		InputStream fis = new FileInputStream(fileName);

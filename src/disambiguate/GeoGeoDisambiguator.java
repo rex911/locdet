@@ -26,37 +26,45 @@ import gazetteer.Location;
  */
 public class GeoGeoDisambiguator {
 
-	public static Location disambiguate(Gazetteer gaz, MutableTextLabels labels, Span name) {
+	public static Location disambiguate(Gazetteer gaz, MutableTextLabels labels, Span name,
+			boolean[] active) {
 		
 		List<Location> candi = gaz.get(name.asString());
-		if (candi == null){
-		    return null;
+		if (candi == null) return null;
+
+		if (active[0]) candi = checkType(candi, labels, name);
+		if (candi.size() == 0) return null;
+		
+		if (active[1]) {
+			List<Location> tempCandi = checkAdjacent(gaz, candi, labels, name);
+		if (tempCandi.size() == 1) 
+			return tempCandi.get(0);
+		if (tempCandi.size() > 1) candi = tempCandi;
 		}
-		else if (candi.size() == 1){
-			return candi.get(0);
+		if (active[2]) {
+			Location tempLoc = checkContext(gaz, candi, labels, name);
+			if (tempLoc != null) 
+				return tempLoc;
 		}
-		else {
-			return infer(gaz, candi, labels, name);
-		}
+		return checkPopulation(candi);
+
 	}
-	// from a list of locations, select the most plausible one given the context
-	private static Location infer(Gazetteer gaz, List<Location> candi, 
-			MutableTextLabels labels, Span name) {
-		// phase 1: type matching
+	
+	private static List<Location> checkType(List<Location> candi, MutableTextLabels labels, Span name) {
 		List<Location> tempCandi = new ArrayList<Location>();
 		for (Location loc : candi) {
 			if (labels.hasType(name, loc.type)) {
 				tempCandi.add(loc);
 			}
 		}
-		if (tempCandi.size() == 1) return tempCandi.get(0);
-		if (tempCandi.size() == 0) return null;
-		
-		//phase 2: adjacent context
-		candi = tempCandi;
+		return tempCandi;
+	}
+	
+	private static List<Location> checkAdjacent(Gazetteer gaz, List<Location> candi,
+			MutableTextLabels labels, Span name) {
 		Span tweet = name.documentSpan();
 		Iterator<Span> i = labels.instanceIterator("Location", tweet.getDocumentId());
-		tempCandi = new ArrayList<Location>(); //temporary candidates
+		List<Location> tempCandi = new ArrayList<Location>(); //temporary candidates
 		while (i.hasNext()){
 			Span adjacent = i.next();
 			// try to disambiguate using adjacent context
@@ -74,22 +82,47 @@ public class GeoGeoDisambiguator {
 			}
 			break;
 		}
-		if (tempCandi.size() == 1) return tempCandi.get(0);
-		
-		// phase 3: whole context of the tweet
-		i = labels.instanceIterator("Location", tweet.getDocumentId());
-		tempCandi = new ArrayList<Location>();
+		return tempCandi;
+	}
+	
+	private static Location checkContext(Gazetteer gaz, List<Location> candi,
+			MutableTextLabels labels, Span name) {
+		Span tweet = name.documentSpan();
+		Iterator<Span> i = labels.instanceIterator("city", tweet.getDocumentId());
+		List<Location> contextLoc = new ArrayList<Location>();
+		boolean[] active = {true, true, false, true};
 		while (i.hasNext()) {
 			Span context = i.next();
+			// Exclude the location name itself
+			if (context == name) continue;
+			contextLoc.add(new GeoGeoDisambiguator().disambiguate(gaz, labels, context, active));
 		}
-		
-		// phase 4: 
-		
-		// phase 5: choose the most populated location
+		if (contextLoc.size() == 0) return null;
+		double minDist = Double.MAX_VALUE;
+		double dist;
+		Location ret = candi.get(0);
+		for (Location loc : candi) {
+			dist = 0;
+			for (Location cLoc : contextLoc) {
+				dist += loc.distanceTo(cLoc);
+			}
+			if (dist < minDist) {
+				minDist = dist;
+				ret = loc;
+			}
+		}
+		return ret;
+	}
+	
+	private static Location checkPopulation(List<Location> candi) {
 		Collections.sort(candi);
 		Collections.reverse(candi);
 		return candi.get(0);
 	}
+	
+	
+	
+	
 	private static boolean contains(Gazetteer gaz, List<String> higher, TextToken name){
 		List<Location> list = gaz.get(name.getValue());
 		if (list == null) return false;

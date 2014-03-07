@@ -36,4 +36,16 @@ public class Location implements Comparable<Location>{
 	public int compareTo(Location that) {
 		return this.population - that.population;
 	}
+	public double distanceTo(Location that) {
+		try {
+			double a = Math.sin(Math.toRadians((Double.parseDouble(this.lat)-Double.parseDouble(that.lat))/2))
+					*Math.sin(Math.toRadians((Double.parseDouble(this.lat)-Double.parseDouble(that.lat))/2))
+					+ Math.cos(Math.toRadians(Double.parseDouble(this.lat)))*Math.cos(Math.toRadians(Double.parseDouble(that.lat)))
+					*Math.sin(Math.toRadians((Double.parseDouble(this.lon)-Double.parseDouble(that.lon))/2))
+					*Math.sin(Math.toRadians((Double.parseDouble(this.lon)-Double.parseDouble(that.lon))/2));
+			return 6371 * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+		} catch (NumberFormatException e) {
+			return Double.MAX_VALUE;
+		}
+	}
 }

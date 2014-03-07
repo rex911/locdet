@@ -1296,6 +1296,7 @@ addToType 3067.xml 60 7 Location
 addToType 3068.xml 60 9 Location
 addToType 307.xml 61 28 Location
 addToType 3070.xml 60 17 Location
+addToType 3070.xml 66 11 Location
 addToType 3071.xml 59 13 Location
 addToType 3072.xml 59 9 Location
 addToType 3074.xml 60 14 Location
@@ -9598,6 +9599,8 @@ addToType 3063.xml 60 2 SP
 addToType 3063.xml 63 2 SP
 addToType 3071.xml 70 2 SP
 addToType 3074.xml 72 2 SP
+addToType 3076.xml 72 2 SP
+addToType 3081.xml 71 2 SP
 addToType 3096.xml 73 2 SP
 addToType 3108.xml 75 2 SP
 addToType 3109.xml 68 2 SP
@@ -9613,6 +9616,7 @@ addToType 3169.xml 59 12 SP
 addToType 3178.xml 60 13 SP
 addToType 3181.xml 60 10 SP
 addToType 319.xml 59 6 SP
+addToType 3192.xml 68 7 SP
 addToType 3193.xml 73 2 SP
 addToType 3205.xml 67 8 SP
 addToType 3219.xml 71 5 SP
@@ -17017,6 +17021,7 @@ addToType 307.xml 61 5 city
 addToType 307.xml 68 4 city
 addToType 307.xml 73 5 city
 addToType 3070.xml 60 13 city
+addToType 3070.xml 66 7 city
 addToType 3071.xml 59 9 city
 addToType 3074.xml 60 9 city
 addToType 3076.xml 61 9 city
@@ -24428,6 +24433,8 @@ addToType 2484.xml 62 2 continent
 addToType 2569.xml 64 6 continent
 addToType 2648.xml 61 13 continent
 addToType 2758.xml 145 6 continent
+addToType 3030.xml 133 4 continent
+addToType 3030.xml 154 4 continent
 addToType 3040.xml 59 13 continent
 addToType 3058.xml 77 6 continent
 addToType 308.xml 142 4 continent
@@ -30957,6 +30964,7 @@ addToType 3077.xml 66 9 country
 addToType 3078.xml 61 3 country
 addToType 3080.xml 60 5 country
 addToType 3081.xml 71 2 country
+addToType 3084.xml 94 6 country
 addToType 3089.xml 60 5 country
 addToType 309.xml 60 3 country
 addToType 3090.xml 59 6 country
