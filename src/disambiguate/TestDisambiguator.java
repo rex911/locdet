@@ -1,9 +1,8 @@
 /**
  * 
  */
-package locdet;
+package disambiguate;
 
-import disambiguate.GeoGeoDisambiguator;
 import edu.cmu.minorthird.text.*;
 import gazetteer.Gazetteer;
 import gazetteer.Location;
@@ -13,6 +12,9 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.Iterator;
 import java.util.Set;
+
+import locdet.Corpus;
+import locdet.TwitterTokenizer;
 
 /**
  * @author rex
@@ -26,20 +28,23 @@ public class TestDisambiguator {
 	 * @throws IOException 
 	 */
 	public static void main(String[] args) throws IOException, ParseException {
-		Corpus corpus = new Corpus("small", "small.labels", new TwitterTokenizer());
-		Iterator<Span> i = corpus.getTextLabels().instanceIterator("city");
+		Corpus corpus = new Corpus("disam", "disam.labels", new TwitterTokenizer());
+		Iterator<Span> i = corpus.getTextLabels().instanceIterator("SP");
 		Gazetteer gaz = new Gazetteer("hyer.txt");
 		int count = 0, count2 = 0;
 		while (i.hasNext()){
 			Span name = i.next();
 			Location temp = new GeoGeoDisambiguator().disambiguate(gaz, corpus.getTextLabels(), name);
-			if (temp!=null) {
+			if (temp!=null  && corpus.getTextLabels().hasType(name, temp.id)) {
 				count ++;
-			} else System.out.println(name.asString());
-			/*if (gaz.get(i.next().asString()) != null) count++;
-			count2 ++;*/
+			} /*else {
+				System.out.println(name.getDocumentContents());
+				System.out.println(name.asString());
+				if (temp!=null) System.out.println(temp.id);
+			}*/
+			count2 ++;
 		}
-		System.out.println(count);
+		System.out.println("Accuracy: " + Float.toString((float) count / count2));
 	}
 }
 

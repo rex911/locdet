@@ -87,6 +87,7 @@ public class GeoGeoDisambiguator {
 		
 		// phase 5: choose the most populated location
 		Collections.sort(candi);
+		Collections.reverse(candi);
 		return candi.get(0);
 	}
 	private static boolean contains(Gazetteer gaz, List<String> higher, TextToken name){
