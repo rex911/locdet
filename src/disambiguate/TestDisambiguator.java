@@ -13,8 +13,8 @@ import java.text.ParseException;
 import java.util.Iterator;
 import java.util.Set;
 
-import locdet.Corpus;
-import locdet.TwitterTokenizer;
+import crf.Corpus;
+import crf.TwitterTokenizer;
 
 /**
  * @author rex
@@ -32,7 +32,7 @@ public class TestDisambiguator {
 		Corpus corpus = new Corpus("disam", "disam.labels", new TwitterTokenizer());
 		Iterator<Span> i = corpus.getTextLabels().instanceIterator("city");	
 		int count = 0, count2 = 0;
-		boolean[] active = {true, true, true, true};
+		boolean[] active = {true, true, false, true};
 		while (i.hasNext()){
 			Span name = i.next();
 			Location temp = new GeoGeoDisambiguator().disambiguate(gaz, corpus.getTextLabels(), name, active);
