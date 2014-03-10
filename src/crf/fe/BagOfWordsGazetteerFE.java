@@ -23,7 +23,7 @@ public class BagOfWordsGazetteerFE extends SpanGazetteerFE {
 	SimpleGaz sGaz;
 	String type;
 	public BagOfWordsGazetteerFE(String type) throws IOException{
-		this.sGaz = new SimpleGaz(new Gazetteer("hyer.txt"), type);
+		this.sGaz = new SimpleGaz("hyer.txt", type);
 		this.type = type;
 	}
 	@Override
