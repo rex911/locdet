@@ -29,18 +29,26 @@ public class SimpleGaz {
 		    String key = enumKey.nextElement();
 		    List<Location> val = gaz.get(key);
 		    for (Location loc : val) {
-		    	if (loc.type.equals(type) && !this.contains(key)){
-		    		add(key);
+		    	if (loc.type.equals(type) && !this.contains(loc.name)){
+		    		add(loc.name);
 		    	}
 		    }
 		}
 	}
 	
 	public boolean contains(String location) {
-		return locations.contains(location.toLowerCase());
+		return locations.contains(location);
 	}
 	
 	public void add(String location) {
+		locations.add(location);
+	}
+	
+	public boolean containsLower(String location) {
+		return locations.contains(location.toLowerCase());
+	}
+	
+	public void addLower(String location) {
 		locations.add(location.toLowerCase());
 	}
 	
