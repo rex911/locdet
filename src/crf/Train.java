@@ -44,7 +44,7 @@ public class Train {
 				//label);
 		//new POSTagger().tag(corpus.getTextLabels());
 		String option = "trainer ll";
-		SequenceAnnotatorLearner learner = new SequenceAnnotatorLearner(new CRFLearner(option), new BagOfWordsGazetteerFE());
+		SequenceAnnotatorLearner learner = new SequenceAnnotatorLearner(new CRFLearner(option), new BagOfWordsGazetteerFE("cities.txt"));
 		//SequenceAnnotatorLearner.SequenceAnnotator ann = (SequenceAnnotator) teacher.train(learner);
 		RandomSplitter s = new RandomSplitter(0.7);
 		CrossValSplitter cvs = new CrossValSplitter(5);

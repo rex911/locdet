@@ -21,6 +21,7 @@ import edu.cmu.minorthird.text.Span;
 import edu.cmu.minorthird.text.StopWords;
 import edu.cmu.minorthird.text.TextLabels;
 import edu.cmu.minorthird.text.Token;
+import gazetteer.SimpleGaz;
 
 /**
  * @author rex
@@ -61,7 +62,7 @@ protected String requiredAnnotationFileToLoad=null;
 protected AnnotatorLoader annotatorLoader=null;
 
 /** Create a feature extractor */
-public SpanGazetteerFE(){
+public SpanGazetteerFE() {
 }
 
 //
@@ -817,21 +818,15 @@ public StringBagResult stopwords(String action){
 }
 
 /** Use ONLY words in Dictionary File. */
-public StringBagResult usewords(String filename) throws IOException{
+public StringBagResult usewords(SimpleGaz sGaz) throws IOException{
 	Bag<String> uwBag=new Bag<String>();
 	for(Iterator<String> i=bag.iterator();i.hasNext();){
 		String str=i.next();
 		int n=bag.getCount(str);
-		File dictFile=new File(filename);
-		FileReader fr=new FileReader(dictFile);
-		BufferedReader in=new BufferedReader(fr);
-		String line;
-		while((line=in.readLine())!=null){
-			line=line.trim();
-			// Check whether str is in Dictionary File
-			if(line.equals(str)){
-				uwBag.add(str,n);
-			}
+		// Check whether str is in Gazetteer
+		if(sGaz.contains(str)){
+			uwBag.add(str,n);
+
 		}
 	}
 	return new StringBagResult(extend("usewords"),fe,uwBag);
