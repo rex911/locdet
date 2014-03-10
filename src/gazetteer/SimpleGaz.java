@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
+import java.util.Enumeration;
+import java.util.List;
 import java.util.TreeSet;
 
 /**
@@ -21,19 +23,26 @@ import java.util.TreeSet;
 public class SimpleGaz {
 	public final TreeSet<String> locations = new TreeSet<String>();
 	
-	public SimpleGaz(String fileName) throws IOException {
-		InputStream fis = new FileInputStream(fileName);
-		BufferedReader in = new BufferedReader(new InputStreamReader(fis, Charset.forName("UTF-8")));
-		String line;
-		while((line=in.readLine())!=null){
-			line=line.trim();
-			locations.add(line.toLowerCase());
+	public SimpleGaz(Gazetteer gaz, String type) throws IOException {
+		Enumeration<String> enumKey = gaz.locations.keys();
+		while(enumKey.hasMoreElements()) {
+		    String key = enumKey.nextElement();
+		    List<Location> val = gaz.locations.get(key);
+		    for (Location loc : val) {
+		    	if (loc.type.equals(type) && !this.locations.contains(key.toLowerCase())){
+		    		this.locations.add(key.toLowerCase());
+		    	}
+		    }
 		}
-		in.close();
 	}
 	
 	public boolean contains(String location) {
 		return locations.contains(location.toLowerCase());
+	}
+	
+	public static void main(String[] args) throws IOException{
+		SimpleGaz sGaz = new SimpleGaz(new Gazetteer("hyer.txt"), "city");
+		System.out.println(sGaz.contains("Chengdu"));
 	}
 	
 }

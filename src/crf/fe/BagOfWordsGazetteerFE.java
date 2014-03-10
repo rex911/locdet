@@ -10,6 +10,7 @@ import edu.cmu.minorthird.text.Span;
 import edu.cmu.minorthird.text.TextLabels;
 import edu.cmu.minorthird.text.learn.SampleFE;
 import edu.cmu.minorthird.text.learn.SpanGazetteerFE;
+import gazetteer.Gazetteer;
 import gazetteer.SimpleGaz;
 
 /**
@@ -20,16 +21,16 @@ public class BagOfWordsGazetteerFE extends SpanGazetteerFE {
 	
 	static final long serialVersionUID=20140310L;
 	SimpleGaz sGaz;
-	String fileName;
-	public BagOfWordsGazetteerFE(String fileName) throws IOException{
-		this.sGaz = new SimpleGaz(fileName);
-		this.fileName = fileName;
+	String type;
+	public BagOfWordsGazetteerFE(String type) throws IOException{
+		this.sGaz = new SimpleGaz(new Gazetteer("hyer.txt"), type);
+		this.type = type;
 	}
 	@Override
 	public void extractFeatures(TextLabels labels, Span s) {
 		from(s).tokens().emit();
 		try {
-			from(s).tokens().eq().usewords(sGaz).emitGazetteer(fileName);
+			from(s).tokens().eq().usewords(sGaz).emitGazetteer("Is.in.Gazetter." + type);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

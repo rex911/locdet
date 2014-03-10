@@ -33,7 +33,7 @@ public class Train {
 	 * @param args
 	 */
 	public static void main(String[] args) throws NumberFormatException, IOException, ParseException {
-		String dir = "small";	
+		String dir = "train";	
 		String label = "city";
 		String textDir = dir;
 		String labelDir = dir + ".labels";
@@ -44,7 +44,9 @@ public class Train {
 				//label);
 		//new POSTagger().tag(corpus.getTextLabels());
 		String option = "trainer ll";
-		SequenceAnnotatorLearner learner = new SequenceAnnotatorLearner(new CRFLearner(option), new BagOfWordsGazetteerFE("cities.txt"));
+		BagOfWordsGazetteerFE fe = new BagOfWordsGazetteerFE("city");
+		fe.setFeatureStoragePolicy(fe.STORE_AS_BINARY);
+		SequenceAnnotatorLearner learner = new SequenceAnnotatorLearner(new CRFLearner(option), fe);
 		//SequenceAnnotatorLearner.SequenceAnnotator ann = (SequenceAnnotator) teacher.train(learner);
 		RandomSplitter s = new RandomSplitter(0.7);
 		CrossValSplitter cvs = new CrossValSplitter(5);
