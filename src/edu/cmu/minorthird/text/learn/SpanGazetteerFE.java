@@ -823,7 +823,7 @@ public StringBagResult usewords(SimpleGaz sGaz) throws IOException{
 	for(Iterator<String> i=bag.iterator();i.hasNext();){
 		String str=i.next();
 		int n=bag.getCount(str);
-		// Check whether str is in Gazetteer
+		// Check whether str is in gazetteer
 		if(sGaz.contains(str)){
 			uwBag.add(str,n);
 

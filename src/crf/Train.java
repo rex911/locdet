@@ -44,9 +44,11 @@ public class Train {
 				//label);
 		//new POSTagger().tag(corpus.getTextLabels());
 		String option = "trainer ll";
+		CRFLearner crf = new CRFLearner(option);
+		//crf.setMaxIters(200);
 		BagOfWordsGazetteerFE fe = new BagOfWordsGazetteerFE("city");
-		fe.setFeatureStoragePolicy(fe.STORE_AS_BINARY);
-		SequenceAnnotatorLearner learner = new SequenceAnnotatorLearner(new CRFLearner(option), fe);
+		fe.setFeatureStoragePolicy(BagOfWordsGazetteerFE.STORE_AS_BINARY);
+		SequenceAnnotatorLearner learner = new SequenceAnnotatorLearner(crf, fe);
 		//SequenceAnnotatorLearner.SequenceAnnotator ann = (SequenceAnnotator) teacher.train(learner);
 		RandomSplitter s = new RandomSplitter(0.7);
 		CrossValSplitter cvs = new CrossValSplitter(5);

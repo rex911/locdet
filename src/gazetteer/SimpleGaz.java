@@ -27,10 +27,10 @@ public class SimpleGaz {
 		Enumeration<String> enumKey = gaz.locations.keys();
 		while(enumKey.hasMoreElements()) {
 		    String key = enumKey.nextElement();
-		    List<Location> val = gaz.locations.get(key);
+		    List<Location> val = gaz.get(key);
 		    for (Location loc : val) {
-		    	if (loc.type.equals(type) && !this.locations.contains(key.toLowerCase())){
-		    		this.locations.add(key.toLowerCase());
+		    	if (loc.type.equals(type) && !this.contains(key)){
+		    		add(key);
 		    	}
 		    }
 		}
@@ -38,6 +38,10 @@ public class SimpleGaz {
 	
 	public boolean contains(String location) {
 		return locations.contains(location.toLowerCase());
+	}
+	
+	public void add(String location) {
+		locations.add(location.toLowerCase());
 	}
 	
 	public static void main(String[] args) throws IOException{
