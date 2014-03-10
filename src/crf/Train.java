@@ -5,6 +5,8 @@ package crf;
 
 import java.io.IOException;
 import java.text.ParseException;
+
+import crf.fe.BagOfWordsGazetteerFE;
 import edu.cmu.minorthird.text.learn.*;
 import edu.cmu.minorthird.text.learn.experiments.*;
 import edu.cmu.minorthird.classify.experiments.CrossValSplitter;
@@ -31,7 +33,7 @@ public class Train {
 	 * @param args
 	 */
 	public static void main(String[] args) throws NumberFormatException, IOException, ParseException {
-		String dir = "train";	
+		String dir = "small";	
 		String label = "city";
 		String textDir = dir;
 		String labelDir = dir + ".labels";
@@ -40,8 +42,9 @@ public class Train {
 		
 		//TextLabelsAnnotatorTeacher teacher = new TextLabelsAnnotatorTeacher(corpus.getTextLabels(),
 				//label);
-				
-		SequenceAnnotatorLearner learner = new SequenceAnnotatorLearner(new CRFLearner("trainer ll"), new Recommended.TokenFE());
+		//new POSTagger().tag(corpus.getTextLabels());
+		String option = "trainer ll";
+		SequenceAnnotatorLearner learner = new SequenceAnnotatorLearner(new CRFLearner(option), new BagOfWordsGazetteerFE());
 		//SequenceAnnotatorLearner.SequenceAnnotator ann = (SequenceAnnotator) teacher.train(learner);
 		RandomSplitter s = new RandomSplitter(0.7);
 		CrossValSplitter cvs = new CrossValSplitter(5);
