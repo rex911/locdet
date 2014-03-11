@@ -37,11 +37,11 @@ public class SimpleGaz {
 			if (type.equals(parts[2])) {
 				if (!this.contains(parts[1])) this.add(parts[1]);
 				// add alternate names
-				for (String name: parts[7].split(",")){
+				/*for (String name: parts[7].split(",")){
 					if (!this.contains(name)) {
 						this.add(name);
 					}
-				}
+				}*/
 			}
 			
 		}
