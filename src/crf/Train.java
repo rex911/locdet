@@ -6,7 +6,7 @@ package crf;
 import java.io.IOException;
 import java.text.ParseException;
 
-import crf.fe.BagOfWordsGazetteerFE;
+import crf.fe.*;
 import edu.cmu.minorthird.text.learn.*;
 import edu.cmu.minorthird.text.learn.experiments.*;
 import edu.cmu.minorthird.classify.experiments.CrossValSplitter;
@@ -42,11 +42,12 @@ public class Train {
 		
 		//TextLabelsAnnotatorTeacher teacher = new TextLabelsAnnotatorTeacher(corpus.getTextLabels(),
 				//label);
-		//new POSTagger().tag(corpus.getTextLabels());
+		new POSTagger().tag(corpus.getTextLabels());
 		String option = "trainer ll";
 		CRFLearner crf = new CRFLearner(option);
 		//crf.setMaxIters(200);
-		BagOfWordsGazetteerFE fe = new BagOfWordsGazetteerFE("city");
+		BagOfWordsPOSWindowFE fe = new BagOfWordsPOSWindowFE();
+		//fe.setFoldCase(false);
 		fe.setFeatureStoragePolicy(BagOfWordsGazetteerFE.STORE_AS_BINARY);
 		SequenceAnnotatorLearner learner = new SequenceAnnotatorLearner(crf, fe);
 		//SequenceAnnotatorLearner.SequenceAnnotator ann = (SequenceAnnotator) teacher.train(learner);
