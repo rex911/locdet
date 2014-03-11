@@ -33,7 +33,7 @@ public class Train {
 	 * @param args
 	 */
 	public static void main(String[] args) throws NumberFormatException, IOException, ParseException {
-		String dir = "small";	
+		String dir = "train";	
 		String label = "city";
 		String textDir = dir;
 		String labelDir = dir + ".labels";
@@ -46,7 +46,7 @@ public class Train {
 		String option = "trainer ll";
 		CRFLearner crf = new CRFLearner(option);
 		//crf.setMaxIters(200);
-		BagOfWordsPOSGazetteerWindowFE fe = new BagOfWordsPOSGazetteerWindowFE(label);
+		BagOfWordsGazetteerWindowFE fe = new BagOfWordsGazetteerWindowFE(label);
 		//fe.setFoldCase(false);
 		fe.setFeatureStoragePolicy(BagOfWordsGazetteerFE.STORE_AS_BINARY);
 		SequenceAnnotatorLearner learner = new SequenceAnnotatorLearner(crf, fe);
