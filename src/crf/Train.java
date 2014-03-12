@@ -34,7 +34,7 @@ public class Train {
 	 */
 	public static void main(String[] args) throws NumberFormatException, IOException, ParseException {
 		String dir = "train";	
-		String label = "city";
+		String label = "SP";
 		String textDir = dir;
 		String labelDir = dir + ".labels";
 		//Corpus corpus = new Corpus(textDir, labelDir);
@@ -42,19 +42,19 @@ public class Train {
 		
 		//TextLabelsAnnotatorTeacher teacher = new TextLabelsAnnotatorTeacher(corpus.getTextLabels(),
 				//label);
-		new POSTagger().tag(corpus.getTextLabels());
+		//POSTagger.tag(corpus.getTextLabels());
 		String option = "trainer ll";
 		CRFLearner crf = new CRFLearner(option);
-		//crf.setMaxIters(200);
-		BagOfWordsGazetteerWindowFE fe = new BagOfWordsGazetteerWindowFE(label);
+		BagOfWordsWindowFE fe = new BagOfWordsWindowFE();
 		//fe.setFoldCase(false);
 		fe.setFeatureStoragePolicy(BagOfWordsGazetteerFE.STORE_AS_BINARY);
 		SequenceAnnotatorLearner learner = new SequenceAnnotatorLearner(crf, fe);
 		//SequenceAnnotatorLearner.SequenceAnnotator ann = (SequenceAnnotator) teacher.train(learner);
-		RandomSplitter s = new RandomSplitter(0.7);
-		CrossValSplitter cvs = new CrossValSplitter(5);
+		//RandomSplitter s = new RandomSplitter(0.7);
+		//s.split(corpus.getTextLabels().instanceIterator(label));
+		CrossValSplitter cvs = new CrossValSplitter(10);
 		cvs.split(corpus.getTextLabels().instanceIterator(label));
-		s.split(corpus.getTextLabels().instanceIterator(label));
+		
 		TextLabelsExperiment expt = new TextLabelsExperiment(
 				corpus.getTextLabels(), 
 				cvs,

@@ -32,16 +32,16 @@ public class SimpleGaz {
 		while ((line = br.readLine()) != null) {
 		    // Deal with the line
 			String[] parts = line.replace("\n", "").split("\t", 8);
-			Location temp = new Location(parts[0], parts[1], parts[2], parts[3],
-					parts[4], parts[5], parts[6]);
 			if (type.equals(parts[2])) {
 				if (!this.contains(parts[1])) this.add(parts[1]);
-				// add alternate names
-				/*for (String name: parts[7].split(",")){
-					if (!this.contains(name)) {
-						this.add(name);
+				// add alternate names for SP and country
+				if (type.equals("SP") || type.equals("country")){
+					for (String name: parts[7].split(",")){
+						if (!this.contains(name)) {
+							this.add(name);
+						}
 					}
-				}*/
+				}
 			}
 			
 		}
