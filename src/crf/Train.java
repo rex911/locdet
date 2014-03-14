@@ -33,7 +33,7 @@ public class Train {
 	 * @param args
 	 */
 	public static void main(String[] args) throws NumberFormatException, IOException, ParseException {
-		String dir = "disam";	
+		String dir = "src/resources/disam";	
 		String label = "city";
 		String textDir = dir;
 		String labelDir = dir + ".labels";

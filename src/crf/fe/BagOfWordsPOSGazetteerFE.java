@@ -16,7 +16,7 @@ public class BagOfWordsPOSGazetteerFE extends SpanGazetteerFE {
 	SimpleGaz sGaz;
 	String type;
 	public BagOfWordsPOSGazetteerFE(String type) throws IOException{
-		this.sGaz = new SimpleGaz("hyer.txt", type);
+		this.sGaz = new SimpleGaz("src/resources/hyer.txt", type);
 		this.type = type;
 	}
 	@Override

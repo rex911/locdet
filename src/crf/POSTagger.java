@@ -33,7 +33,7 @@ public class POSTagger {
 	public static void tag(MutableTextLabels labels) throws IOException {
 		TextBase base = labels.getTextBase();
 		Tagger tagger = new Tagger();
-		tagger.loadModel("model.ritter_ptb_alldata_fixed.20130723.txt");
+		tagger.loadModel("src/resources/model.ritter_ptb_alldata_fixed.20130723.txt");
 		for (Iterator<Span> i = base.documentSpanIterator();i.hasNext();){
 			Span doc = i.next();
 			List<String> tokens = new ArrayList<String>();
