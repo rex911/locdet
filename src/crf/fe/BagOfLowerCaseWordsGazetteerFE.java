@@ -5,7 +5,7 @@ import java.io.IOException;
 import edu.cmu.minorthird.text.Span;
 import edu.cmu.minorthird.text.TextLabels;
 import edu.cmu.minorthird.text.learn.SpanGazetteerFE;
-import gazetteer.SimpleGaz;
+import edu.cmu.minorthird.util.SimpleGaz;
 
 public class BagOfLowerCaseWordsGazetteerFE  extends SpanGazetteerFE {
 	static final long serialVersionUID=20140310L;

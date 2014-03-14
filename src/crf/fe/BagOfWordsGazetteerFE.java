@@ -10,8 +10,8 @@ import edu.cmu.minorthird.text.Span;
 import edu.cmu.minorthird.text.TextLabels;
 import edu.cmu.minorthird.text.learn.SampleFE;
 import edu.cmu.minorthird.text.learn.SpanGazetteerFE;
+import edu.cmu.minorthird.util.SimpleGaz;
 import gazetteer.Gazetteer;
-import gazetteer.SimpleGaz;
 
 /**
  * @author rex

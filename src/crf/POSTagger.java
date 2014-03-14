@@ -52,7 +52,7 @@ public class POSTagger {
 		Corpus corpus = new Corpus("disam", "disam.labels", new TwitterTokenizer());
 		MutableTextLabels labels = corpus.getTextLabels();
 		tag(labels);
-		/*TextBase base = labels.getTextBase();
+		TextBase base = labels.getTextBase();
 		for (Iterator<Span> i = base.documentSpanIterator();i.hasNext();){
 			Span doc = i.next();
 			for (int j = 0;j < doc.size(); j++) {
@@ -60,7 +60,7 @@ public class POSTagger {
 			}
 			
 			
-		}*/
+		}
 		System.out.println(labels.getTokenProperties());
 	}
 
