@@ -22,7 +22,7 @@ public class BagOfWordsPOSGazetteerWindowFE extends SpanGazetteerFE{
 	String type;
 	
 	public BagOfWordsPOSGazetteerWindowFE(String type) throws IOException{
-		this.sGaz = new SimpleGaz("hyer.txt", type);
+		this.sGaz = new SimpleGaz("src/resources/hyer.txt", type);
 		this.type = type;
 	}
 	

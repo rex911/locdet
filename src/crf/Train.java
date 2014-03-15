@@ -3,11 +3,19 @@
  */
 package crf;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.Iterator;
+import java.util.Set;
 
 import crf.fe.*;
+import edu.cmu.minorthird.text.Annotator;
+import edu.cmu.minorthird.text.BasicTextLabels;
+import edu.cmu.minorthird.text.MutableTextLabels;
+import edu.cmu.minorthird.text.Span;
 import edu.cmu.minorthird.text.learn.*;
+import edu.cmu.minorthird.text.learn.SequenceAnnotatorLearner.SequenceAnnotator;
 import edu.cmu.minorthird.text.learn.experiments.*;
 import edu.cmu.minorthird.classify.experiments.CrossValSplitter;
 import edu.cmu.minorthird.classify.experiments.RandomSplitter;
@@ -33,24 +41,23 @@ public class Train {
 	 * @param args
 	 */
 	public static void main(String[] args) throws NumberFormatException, IOException, ParseException {
-		String dir = "src/resources/disam";	
+		String dir = "src/resources/train";	
 		String label = "city";
 		String textDir = dir;
 		String labelDir = dir + ".labels";
 		//Corpus corpus = new Corpus(textDir, labelDir);
 		Corpus corpus = new Corpus(textDir, labelDir, new TwitterTokenizer());
 		
-		//TextLabelsAnnotatorTeacher teacher = new TextLabelsAnnotatorTeacher(corpus.getTextLabels(),
-				//label);
+		TextLabelsAnnotatorTeacher teacher = new TextLabelsAnnotatorTeacher(corpus.getTextLabels(), label);
 		POSTagger.tag(corpus.getTextLabels());
 		String option = "trainer ll";
 		CRFLearner crf = new CRFLearner(option);
-		BagOfWordsPOSGazetteerFE fe = new BagOfWordsPOSGazetteerFE(label);
+		BagOfWordsPOSGazetteerWindowFE fe = new BagOfWordsPOSGazetteerWindowFE(label);
 		//fe.setFoldCase(false);
 		fe.setFeatureStoragePolicy(BagOfWordsGazetteerFE.STORE_AS_BINARY);
 		SequenceAnnotatorLearner learner = new SequenceAnnotatorLearner(crf, fe);
-		//SequenceAnnotatorLearner.SequenceAnnotator ann = (SequenceAnnotator) teacher.train(learner);
-		RandomSplitter s = new RandomSplitter(0.7);
+		SequenceAnnotatorLearner.SequenceAnnotator ann = (SequenceAnnotator) teacher.train(learner); 
+		/*RandomSplitter s = new RandomSplitter(0.7);
 		s.split(corpus.getTextLabels().instanceIterator(label));
 		CrossValSplitter cvs = new CrossValSplitter(10);
 		cvs.split(corpus.getTextLabels().instanceIterator(label));
@@ -60,8 +67,21 @@ public class Train {
 				s,
 				learner,
 				label, label + "_prediction");
-		expt.doExperiment();
-		
+		expt.doExperiment();*/
+		textDir = "src/resources/test";
+		Corpus test = new Corpus(textDir, new TwitterTokenizer());
+		MutableTextLabels labels = test.getTextLabels();
+		POSTagger.tag(labels);
+		ann.annotate(labels);
+		for (Iterator<Span> i = test.getTextbase().documentSpanIterator();i.hasNext();){
+			Span s = i.next();
+			for (int j = 0; j< s.size(); j++) {
+			if (!labels.getProperty(s.getToken(j), "_inside").equals("NEG")){
+			//System.out.println(s.getDocumentContents());
+			System.out.println(s.getToken(j).toString());
+			}
+			}
+		}
 	}
 
 }

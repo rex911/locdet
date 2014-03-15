@@ -46,6 +46,12 @@ public class Corpus {
 		TextLabelsLoader tll = new TextLabelsLoader();
 		this.tl = tll.loadOps(tb, labelFile);
 	}
+	public Corpus (String textDir, Tokenizer tok) throws IOException, ParseException {
+		File textFile = new File(textDir);
+		TextBaseLoader tbl = new TextBaseLoader(TextBaseLoader.DOC_PER_FILE);
+		this.tb = tbl.load(textFile, tok);
+		this.tl = new BasicTextLabels(tb);
+	}
 	public Corpus (String textDir) throws IOException, ParseException {
 		File textFile = new File(textDir);
 		TextBaseLoader tbl = new TextBaseLoader(TextBaseLoader.DOC_PER_FILE);
