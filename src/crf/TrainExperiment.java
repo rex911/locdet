@@ -57,38 +57,18 @@ public class TrainExperiment {
 		//fe.setFoldCase(false);
 		fe.setFeatureStoragePolicy(BagOfWordsGazetteerFE.STORE_AS_BINARY);
 		SequenceAnnotatorLearner learner = new SequenceAnnotatorLearner(crf, fe);
-		SequenceAnnotatorLearner.SequenceAnnotator ann = (SequenceAnnotator) teacher.train(learner); 
-		String saveAs = "model.ann";
-		try{
-			IOUtil.saveSerialized(ann,new File(saveAs));
-		}catch(IOException e){
-			throw new IllegalArgumentException("can't save to "+saveAs+": "+e);
-		}
-		/*RandomSplitter s = new RandomSplitter(0.7);
+		RandomSplitter s = new RandomSplitter(0.7);
 		s.split(corpus.getTextLabels().instanceIterator(label));
 		CrossValSplitter cvs = new CrossValSplitter(10);
 		cvs.split(corpus.getTextLabels().instanceIterator(label));
 		
 		TextLabelsExperiment expt = new TextLabelsExperiment(
 				corpus.getTextLabels(), 
-				s,
+				cvs,
 				learner,
 				label, label + "_prediction");
-		expt.doExperiment();*/
-		textDir = "src/resources/test";
-		Corpus test = new Corpus(textDir, new TwitterTokenizer());
-		MutableTextLabels labels = test.getTextLabels();
-		POSTagger.tag(labels);
-		ann.annotate(labels);
-		for (Iterator<Span> i = test.getTextbase().documentSpanIterator();i.hasNext();){
-			Span s = i.next();
-			for (int j = 0; j< s.size(); j++) {
-			if (!labels.getProperty(s.getToken(j), "_inside").equals("NEG")){
-			//System.out.println(s.getDocumentContents());
-			System.out.println(s.getToken(j).toString());
-			}
-			}
-		}
+		expt.doExperiment();
+		
 	}
 
 }
