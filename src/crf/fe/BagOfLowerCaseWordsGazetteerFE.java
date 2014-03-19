@@ -1,18 +1,19 @@
 package crf.fe;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 import edu.cmu.minorthird.text.Span;
 import edu.cmu.minorthird.text.TextLabels;
 import edu.cmu.minorthird.text.learn.SpanGazetteerFE;
 import edu.cmu.minorthird.util.SimpleGaz;
 
-public class BagOfLowerCaseWordsGazetteerFE  extends SpanGazetteerFE {
+public class BagOfLowerCaseWordsGazetteerFE  extends SpanGazetteerFE implements Serializable{
 	static final long serialVersionUID=20140310L;
 	SimpleGaz sGaz;
 	String type;
 	public BagOfLowerCaseWordsGazetteerFE(String type) throws IOException{
-		this.sGaz = new SimpleGaz("hyer.txt", type);
+		this.sGaz = new SimpleGaz("src/resources/hyer.txt", type);
 		this.type = type;
 	}
 	@Override

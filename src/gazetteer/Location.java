@@ -7,13 +7,40 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
+ * the class that stores information of a certain location
+ * 
  * @author rex
  *
- * the class that stores information of a certain location
+ * 
  */
 public class Location implements Comparable<Location>{
-	public final String id, name, type, lat, lon;
+	/**
+	 * a unique identifier of this location
+	 */
+	public final String id;
+	/**
+	 * the official name of this location
+	 */
+	public final String name;
+	/**
+	 * the type of this location; can be either "city", "SP", "country" or "continent"
+	 */
+	public final String type;
+	/**
+	 * latitude of this location; only available for cities.
+	 */
+	public final String lat;
+	/**
+	 * longitude of this location; only available for cities.
+	 */
+	public final String lon;
+	/**
+	 * population of this location; only available for cities.
+	 */
 	public final int population;
+	/**
+	 * higher political districts of this location.
+	 */
 	public final List<String> higher;
 	public Location(String id, String name, String type, String higher, String population,
 			String lat, String lon) {
@@ -36,6 +63,12 @@ public class Location implements Comparable<Location>{
 	public int compareTo(Location that) {
 		return this.population - that.population;
 	}
+	/**
+	 * Calculate distance between two locations, based on their coordinates.
+	 * 
+	 * @param that the other location 
+	 * @return distance measured by KM; Double.MAX_VALUE if unable to calculate
+	 */
 	public double distanceTo(Location that) {
 		try {
 			double a = Math.sin(Math.toRadians((Double.parseDouble(this.lat)-Double.parseDouble(that.lat))/2))

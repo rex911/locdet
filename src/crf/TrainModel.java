@@ -19,11 +19,20 @@ import edu.cmu.minorthird.text.learn.SequenceAnnotatorLearner.SequenceAnnotator;
 import edu.cmu.minorthird.util.IOUtil;
 
 /**
+ * Train annotators and save them as file.<br>
+ * This class is no longer needed once annotators are trained, unless re-training is required.
+ * 
  * @author rex
  *
  */
 public class TrainModel {
 	private static String resourceDir = "src/resources/";
+	/**
+	 * @param trainingSet the training set used; use "train"
+	 * @param label the label used; use either "city", "SP" or "country"
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	public static void saveModel(String trainingSet, String label) throws IOException, ParseException {
 		String dir = resourceDir + trainingSet;	
 		String textDir = dir;
@@ -38,6 +47,7 @@ public class TrainModel {
 		BagOfWordsPOSGazetteerWindowFE fe = new BagOfWordsPOSGazetteerWindowFE(label);
 		fe.setFeatureStoragePolicy(BagOfWordsGazetteerFE.STORE_AS_BINARY);
 		SequenceAnnotatorLearner learner = new SequenceAnnotatorLearner(crf, fe);
+		learner.setAnnotationType(label);
 		SequenceAnnotatorLearner.SequenceAnnotator ann = (SequenceAnnotator) teacher.train(learner); 
 		String saveAs = resourceDir + label + ".ann";
 		try{

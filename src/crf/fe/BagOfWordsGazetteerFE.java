@@ -5,6 +5,7 @@ package crf.fe;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 
 import edu.cmu.minorthird.text.Span;
 import edu.cmu.minorthird.text.TextLabels;
@@ -17,13 +18,13 @@ import gazetteer.Gazetteer;
  * @author rex
  *
  */
-public class BagOfWordsGazetteerFE extends SpanGazetteerFE {
+public class BagOfWordsGazetteerFE extends SpanGazetteerFE implements Serializable{
 	
 	static final long serialVersionUID=20140310L;
 	SimpleGaz sGaz;
 	String type;
 	public BagOfWordsGazetteerFE(String type) throws IOException{
-		this.sGaz = new SimpleGaz("hyer.txt", type);
+		this.sGaz = new SimpleGaz("src/resources/hyer.txt", type);
 		this.type = type;
 	}
 	@Override

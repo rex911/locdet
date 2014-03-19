@@ -3,6 +3,8 @@
  */
 package crf.fe;
 
+import java.io.Serializable;
+
 import edu.cmu.minorthird.text.Span;
 import edu.cmu.minorthird.text.TextLabels;
 import edu.cmu.minorthird.text.learn.SpanFE;
@@ -11,7 +13,7 @@ import edu.cmu.minorthird.text.learn.SpanFE;
  * @author rex
  *
  */
-public class BagOfWordsWindowFE extends SpanFE {
+public class BagOfWordsWindowFE extends SpanFE implements Serializable{
 	
 	
 	private static final long serialVersionUID = 20140311L;

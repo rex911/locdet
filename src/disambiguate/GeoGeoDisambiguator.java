@@ -26,6 +26,15 @@ import gazetteer.Location;
  */
 public class GeoGeoDisambiguator {
 
+	/**
+	 * Call this method to do disambiguation.
+	 * 
+	 * @param gaz the loaded Gazetteer
+	 * @param labels the MutableTextLabels used for disambiguation
+	 * @param name the Span which corresponds to the location name requiring disambiguation
+	 * @param active a boolean array, decides what modules shall be used for disambiguation
+	 * @return an instance of Class Location or null, if disambiguation is not successful
+	 */
 	public static Location disambiguate(Gazetteer gaz, MutableTextLabels labels, Span name,
 			boolean[] active) {
 		
@@ -50,6 +59,14 @@ public class GeoGeoDisambiguator {
 
 	}
 	
+	/**
+	 * Module one: checks if candidates' type is the same as the type being annotated previously.
+	 * 
+	 * @param candi
+	 * @param labels
+	 * @param name
+	 * @return
+	 */
 	private static List<Location> checkType(List<Location> candi, MutableTextLabels labels, Span name) {
 		List<Location> tempCandi = new ArrayList<Location>();
 		for (Location loc : candi) {
@@ -60,6 +77,21 @@ public class GeoGeoDisambiguator {
 		return tempCandi;
 	}
 	
+	/**
+	 * <p>Module two: checks the adjacent context of the target location name; more specifically, checks if 
+	 * succeeding token(s) is the higher political district containing the target location name.</p>
+	 * <p>For example, if "Ottawa" is followed by "Ontario", only candidates with a higher political district named
+	 * "Ontario" will be kept.</p>
+	 * 
+	 * <p>After this module, if there remains only 1 candidate, terminate disambiguation and return this candidate;
+	 * otherwise, go to the next activated module</p>
+	 * 
+	 * @param gaz
+	 * @param candi
+	 * @param labels
+	 * @param name
+	 * @return
+	 */
 	private static List<Location> checkAdjacent(Gazetteer gaz, List<Location> candi,
 			MutableTextLabels labels, Span name) {
 		Span tweet = name.documentSpan();
@@ -85,6 +117,16 @@ public class GeoGeoDisambiguator {
 		return tempCandi;
 	}
 	
+	/**
+	 * Module three: check the other locations (if any) mentioned in the same Tweet.
+	 * Return the candidate with minimal distance total to those locations.
+	 * 
+	 * @param gaz
+	 * @param candi
+	 * @param labels
+	 * @param name
+	 * @return
+	 */
 	private static Location checkContext(Gazetteer gaz, List<Location> candi,
 			MutableTextLabels labels, Span name) {
 		Span tweet = name.documentSpan();
@@ -95,7 +137,7 @@ public class GeoGeoDisambiguator {
 			Span context = i.next();
 			// Exclude the location name itself
 			if (context == name) continue;
-			contextLoc.add(new GeoGeoDisambiguator().disambiguate(gaz, labels, context, active));
+			contextLoc.add(GeoGeoDisambiguator.disambiguate(gaz, labels, context, active));
 		}
 		if (contextLoc.size() == 0) return null;
 		double minDist = Double.MAX_VALUE;
@@ -114,6 +156,12 @@ public class GeoGeoDisambiguator {
 		return ret;
 	}
 	
+	/**
+	 * Module five: "last resort". If all previous modules failed, return the candidate with largest population.
+	 * 
+	 * @param candi
+	 * @return
+	 */
 	private static Location checkPopulation(List<Location> candi) {
 		Collections.sort(candi);
 		Collections.reverse(candi);

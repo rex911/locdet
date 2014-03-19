@@ -23,7 +23,7 @@ import edu.cmu.minorthird.text.Span;
 import edu.cmu.minorthird.text.TextBase;
 
 /**
- * POS tag tweets using CMU's POS tagger (http://www.ark.cs.cmu.edu/TweetNLP/)
+ * POS tag tweets using a modified version of CMU's POS tagger (http://www.ark.cs.cmu.edu/TweetNLP/)
  * 
  * @author rex
  *

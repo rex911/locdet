@@ -17,6 +17,8 @@ import crf.Corpus;
 import crf.TwitterTokenizer;
 
 /**
+ * Evaluates the performance of disambiguator.
+ * 
  * @author rex
  *
  */
@@ -28,14 +30,14 @@ public class TestDisambiguator {
 	 * @throws IOException 
 	 */
 	public static void main(String[] args) throws IOException, ParseException {
-		Gazetteer gaz = new Gazetteer("hyer.txt");
-		Corpus corpus = new Corpus("disam", "disam.labels", new TwitterTokenizer());
+		Gazetteer gaz = new Gazetteer("src/resources/hyer.txt");
+		Corpus corpus = new Corpus("src/resources/disam", "src/resources/disam.labels", new TwitterTokenizer());
 		Iterator<Span> i = corpus.getTextLabels().instanceIterator("city");	
 		int count = 0, count2 = 0;
-		boolean[] active = {true, true, false, true};
+		boolean[] active = {true, true, true, true};
 		while (i.hasNext()){
 			Span name = i.next();
-			Location temp = new GeoGeoDisambiguator().disambiguate(gaz, corpus.getTextLabels(), name, active);
+			Location temp = GeoGeoDisambiguator.disambiguate(gaz, corpus.getTextLabels(), name, active);
 			if (temp!=null  && corpus.getTextLabels().hasType(name, temp.id)) {
 				count ++;
 			} else {

@@ -4,6 +4,8 @@
 package crf;
 
 /**
+ * Load corpus from files
+ * 
  * @author rex
  *
  */
@@ -14,17 +16,14 @@ import java.text.ParseException;
 import edu.cmu.minorthird.text.*;
 public class Corpus {
 
-	/**
-	 * @param args
-	 * @throws IOException 
-	 * @throws NumberFormatException 
-	 * @throws ParseException 
-	 */
 	private MutableTextBase tb;
 	private MutableTextLabels tl;
 	
-	// constructor. build the corpus from both 
+	 
 	/**
+	 * Load a labeled corpus without specified tokenizer(i.e. a default regex tokenizer will be
+	 * used)
+	 * 
 	 * @param textDir
 	 * @param labelDir
 	 * @throws IOException
@@ -38,6 +37,16 @@ public class Corpus {
 		TextLabelsLoader tll = new TextLabelsLoader();
 		this.tl = tll.loadOps(tb, labelFile);
 	}
+	/**
+	 * Load a labeld corpus using a specified tokenizer; in this project, it is recommended to use
+	 * crf.TwitterTokenizer
+	 * 
+	 * @param textDir
+	 * @param labelDir
+	 * @param tok
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	public Corpus (String textDir, String labelDir, Tokenizer tok) throws IOException, ParseException {
 		File textFile = new File(textDir);
 		File labelFile = new File(labelDir);
@@ -46,12 +55,27 @@ public class Corpus {
 		TextLabelsLoader tll = new TextLabelsLoader();
 		this.tl = tll.loadOps(tb, labelFile);
 	}
+	/**
+	 * Load an unlabeled corpus, using specified tokenizer
+	 * 
+	 * @param textDir
+	 * @param tok
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	public Corpus (String textDir, Tokenizer tok) throws IOException, ParseException {
 		File textFile = new File(textDir);
 		TextBaseLoader tbl = new TextBaseLoader(TextBaseLoader.DOC_PER_FILE);
 		this.tb = tbl.load(textFile, tok);
 		this.tl = new BasicTextLabels(tb);
 	}
+	/**
+	 * Load an unlabeled corpus without specifying a tokenizer
+	 * 
+	 * @param textDir
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	public Corpus (String textDir) throws IOException, ParseException {
 		File textFile = new File(textDir);
 		TextBaseLoader tbl = new TextBaseLoader(TextBaseLoader.DOC_PER_FILE);

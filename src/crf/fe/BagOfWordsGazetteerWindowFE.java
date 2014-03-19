@@ -4,6 +4,7 @@
 package crf.fe;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 import edu.cmu.minorthird.text.Span;
 import edu.cmu.minorthird.text.TextLabels;
@@ -14,7 +15,7 @@ import edu.cmu.minorthird.util.SimpleGaz;
  * @author rex
  *
  */
-public class BagOfWordsGazetteerWindowFE extends SpanGazetteerFE{
+public class BagOfWordsGazetteerWindowFE extends SpanGazetteerFE implements Serializable{
 	
 	private static final long serialVersionUID = 20140311L;
     protected int windowSize=1;
@@ -22,7 +23,7 @@ public class BagOfWordsGazetteerWindowFE extends SpanGazetteerFE{
 	String type;
 	
 	public BagOfWordsGazetteerWindowFE(String type) throws IOException{
-		this.sGaz = new SimpleGaz("hyer.txt", type);
+		this.sGaz = new SimpleGaz("src/resources/hyer.txt", type);
 		this.type = type;
 	}
 	

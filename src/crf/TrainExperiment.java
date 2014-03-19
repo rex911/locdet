@@ -24,14 +24,14 @@ import edu.cmu.minorthird.ui.*;
 import edu.cmu.minorthird.util.IOUtil;
 
 /**
- * Run this class to see results of CRF classifier
+ * Run this class to see results of CRF classifier<br>
  * 
- * Configurations:
- * The value of variable String label specifies which label to predict
+ * Configurations:<br>
+ * The value of variable String label specifies which label to predict<br>
  * Change the value of variable String dir to "small" to use a smaller corpus which can
- * be trained faster.
- * The second argument of TextLabelsExperiment decides how training data are splitted; 
- * use s for 70%-30% split, use cvs for 5-fold CV.
+ * be trained faster.<br>
+ * The second argument of TextLabelsExperiment decides how training data are splitted; <br>
+ * use s for 70%-30% split, use cvs for 10-fold CV.<br>
  * 
  * @author rex
  *

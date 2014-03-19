@@ -12,8 +12,10 @@ import edu.cmu.minorthird.text.Tokenizer;
 import cmu.arktweetnlp.Twokenize;
 
 /**
- * @author rex
  * A tokenizer subject to MinorThird standards, created from CMU's ARK tokenizer
+ * 
+ * @author rex
+ * 
  */ 
 public class TwitterTokenizer implements Tokenizer {
 
