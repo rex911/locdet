@@ -21,7 +21,7 @@ public class Corpus {
 	
 	 
 	/**
-	 * Load a labeled corpus without specified tokenizer(i.e. a default regex tokenizer will be
+	 * Load a labeled corpus without specified tokenizer(i.e a default regex tokenizer will be
 	 * used)
 	 * 
 	 * @param textDir
@@ -82,7 +82,7 @@ public class Corpus {
 		this.tb = tbl.load(textFile);
 		this.tl = new BasicTextLabels(tb);
 	}
-	public MutableTextBase getTextbase() {
+	public MutableTextBase getTextBase() {
 		return this.tb;
 	}
 	public MutableTextLabels getTextLabels() {
