@@ -7,11 +7,14 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.Iterator;
+import java.util.Random;
 import java.util.Set;
 
 import crf.fe.*;
 import edu.cmu.minorthird.text.Annotator;
+import edu.cmu.minorthird.text.BasicSpan;
 import edu.cmu.minorthird.text.BasicTextLabels;
+import edu.cmu.minorthird.text.MonotonicTextLabels;
 import edu.cmu.minorthird.text.MutableTextLabels;
 import edu.cmu.minorthird.text.Span;
 import edu.cmu.minorthird.text.learn.*;
@@ -49,25 +52,50 @@ public class TrainExperiment {
 		//Corpus corpus = new Corpus(textDir, labelDir);
 		Corpus corpus = new Corpus(textDir, labelDir, new TwitterTokenizer());
 		
-		TextLabelsAnnotatorTeacher teacher = new TextLabelsAnnotatorTeacher(corpus.getTextLabels(), label);
 		POSTagger.tag(corpus.getTextLabels());
+		
+		File f = new File("sample.labels");
+		((BasicTextLabels) corpus.getTextLabels()).saveAs(f, "Minorthird TextLabels");
+		System.exit(1);
+		
 		String option = "trainer ll";
 		CRFLearner crf = new CRFLearner(option);
-		BagOfWordsPOSGazetteerWindowFE fe = new BagOfWordsPOSGazetteerWindowFE(label);
-		//fe.setFoldCase(false);
+		//BagOfWordsWindowFE fe = new BagOfWordsWindowFE();
+		
+		//SampleFE.BagOfWordsFE fe = new SampleFE.BagOfWordsFE();
+		
+		Recommended.DocumentFE fe = new Recommended.DocumentFE();
+		fe.setFoldCase(false);
+		
 		fe.setFeatureStoragePolicy(BagOfWordsGazetteerFE.STORE_AS_BINARY);
 		SequenceAnnotatorLearner learner = new SequenceAnnotatorLearner(crf, fe);
 		RandomSplitter s = new RandomSplitter(0.7);
 		s.split(corpus.getTextLabels().instanceIterator(label));
-		CrossValSplitter cvs = new CrossValSplitter(10);
+		CrossValSplitter cvs = new CrossValSplitter(new Random(1000), 10);
 		cvs.split(corpus.getTextLabels().instanceIterator(label));
 		
 		TextLabelsExperiment expt = new TextLabelsExperiment(
 				corpus.getTextLabels(), 
-				cvs,
+				s,
 				learner,
 				label, label + "_prediction");
 		expt.doExperiment();
+		
+		/*Annotator ann=learner.getAnnotator();
+		Iterator<BasicSpan> i =s.getTest(1);
+		while (i.hasNext()){
+			String content = i.next().getDocumentContents();
+			BasicTextLabels temp = new BasicTextLabels(content);
+			ann.annotate(temp);
+			System.out.println(content);
+			Set<String> set = temp.getTokenProperties();
+			for (String ss: set){
+				Iterator<Span> j =temp.instanceIterator(ss);
+				while (j.hasNext()){
+					System.out.println(j.next().asString());
+				}
+			}
+		}*/
 		
 	}
 

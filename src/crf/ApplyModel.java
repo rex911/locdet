@@ -3,8 +3,13 @@
  */
 package crf;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -87,21 +92,35 @@ public class ApplyModel {
 	}
 	
 	public static void main(String[] args) throws IOException, ParseException {
-		SequenceAnnotator ann = loadModel("city");
-		//ArrayList<String> text = new ArrayList<String>();
-		Corpus corpus = new Corpus("src/resources/disam", new TwitterTokenizer());
+		String lable = "city";
+		SequenceAnnotator ann = loadModel(lable);
+		ArrayList<String> text = new ArrayList<String>();
+		String fileName = "src/resources/usa.text";
+		InputStream fis = new FileInputStream(fileName );
+		BufferedReader br = new BufferedReader(new InputStreamReader(fis, Charset.forName("UTF-8")));
+		String line;
+		while ((line = br.readLine()) != null) {
+			text.add(line);
+		}
+		br.close();
+		br = null;
+		fis = null;
+		/*Corpus corpus = new Corpus("src/resources/disam", new TwitterTokenizer());
 		BasicTextLabels labels = (BasicTextLabels) corpus.getTextLabels();
-		ann.annotate(labels);
+		ann.annotate(labels);*/
+		BasicTextLabels labels = annotate(ann, text);
 		Gazetteer gaz = new Gazetteer("src/resources/hyer.txt");
 		disambiguate(labels, gaz);
-		for (Iterator<Span> i =labels.getSpansWithProperty("trueLoc");i.hasNext();) {
+		for (Iterator<Span> i =labels.instanceIterator(lable);i.hasNext();) {
 			Span s = i.next();
-			System.out.println(s);
-			Location loc = gaz.getByID(labels.getProperty(s, "trueLoc"));
-			if (loc != null) {
-				System.out.println(loc.name);
-				for (String ss : loc.higher) {
-					System.out.println(ss);
+			String id = labels.getProperty(s, "trueLoc");
+			if (id != null) {
+				Location loc = gaz.getByID(id);
+
+				if (loc != null) {
+					System.out.println(loc.name);
+					System.out.println(loc.lat + " " + loc.lon);
+
 				}
 			}
 		}

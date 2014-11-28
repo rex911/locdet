@@ -10,6 +10,7 @@ import java.util.Iterator;
 
 import crf.fe.BagOfWordsGazetteerFE;
 import crf.fe.BagOfWordsPOSGazetteerWindowFE;
+import crf.fe.POSGazetteerWindowFE;
 import edu.cmu.minorthird.classify.sequential.CRFLearner;
 import edu.cmu.minorthird.text.MutableTextLabels;
 import edu.cmu.minorthird.text.Span;
@@ -44,12 +45,13 @@ public class TrainModel {
 		POSTagger.tag(corpus.getTextLabels());
 		String option = "trainer ll";
 		CRFLearner crf = new CRFLearner(option);
-		BagOfWordsPOSGazetteerWindowFE fe = new BagOfWordsPOSGazetteerWindowFE(label);
+		POSGazetteerWindowFE fe = new POSGazetteerWindowFE(label);
+		fe.setFeatureWindowSize(3);
 		fe.setFeatureStoragePolicy(BagOfWordsGazetteerFE.STORE_AS_BINARY);
 		SequenceAnnotatorLearner learner = new SequenceAnnotatorLearner(crf, fe);
 		learner.setAnnotationType(label);
 		SequenceAnnotatorLearner.SequenceAnnotator ann = (SequenceAnnotator) teacher.train(learner); 
-		String saveAs = resourceDir + label + ".ann";
+		String saveAs = resourceDir + label + "_nobow_t.ann";
 		try{
 			IOUtil.saveSerialized(ann,new File(saveAs));
 		}catch(IOException e){
@@ -64,7 +66,7 @@ public class TrainModel {
 	public static void main(String[] args) throws IOException, ParseException {
 		String[] labels = {"city", "country", "SP"};
 		for (String label : labels) {
-			saveModel("train", label);
+			saveModel("train_t", label);
 		}
 
 	}
